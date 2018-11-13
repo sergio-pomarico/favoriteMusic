@@ -1,9 +1,3 @@
-/**
- * Artist Box Component
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,7 +6,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default class App extends Component {
   render() {
     const { artist } = this.props;
-    console.warn(artist);
     return (
       <View style={styles.artistBox}>
         <Image style={styles.image} source={{uri: artist.image}} />

@@ -1,24 +1,28 @@
-/**
- * Favorite Music
- * @format
- * @flow
- */
-
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ArtistList from './Components/ArtistList';
+import getArtists from './api';
 
 export default class FavoriteMusic extends Component {
 
+  constructor(){
+    super()
+    this.state = {
+      artists: []
+    }
+  }
+
+  componentDidMount() {
+    getArtists().then(artists => {
+      this.setState({
+        artists: artists
+      })
+    });
+  }
+
   render() {
-    const artist = {
-      'name': 'David Bowie',
-      'image': 'https://www.christies.com/media-library/images/features/articles/2016/01/11/david-bowie/mainimage.jpg',
-      'likes': 200,
-      'comments': 24
-    };
-    const Artists = Array(10).fill(artist);
+    const artists = this.state.artists;
     return (
-      <ArtistList artists={Artists}/>
+      <ArtistList artists={artists}/>
     );
   }
 }
