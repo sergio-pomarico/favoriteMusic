@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import { StyleSheet, FlatList, View} from 'react-native';
+import { StyleSheet, FlatList, View, TouchableOpacity} from 'react-native';
+import { withNavigation } from 'react-navigation';
 import ArtistBox from './ArtistBox';
 
-export default class ArtistsList extends Component {
+class ArtistsList extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -11,7 +12,17 @@ export default class ArtistsList extends Component {
   }
 
   renderItem = (artist) => {
-    return <ArtistBox artist={artist.item}/>
+    return (
+      <TouchableOpacity onPress={() => {this.handlePress(artist.item)}}>
+        <ArtistBox artist={artist.item}/>
+      </TouchableOpacity>
+    )
+  }
+
+  handlePress = (artist) => {
+    this.props.navigation.push('Details', {
+      artist: artist
+    })
   }
 
   componentWillReceiveProps(newProps){
@@ -39,6 +50,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'lightgray',
-    paddingTop: 50
+    paddingTop: 10
   },
 });
+
+export default withNavigation(ArtistsList);

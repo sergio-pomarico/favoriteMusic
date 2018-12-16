@@ -1,29 +1,21 @@
 import React, { Component } from 'react';
-import ArtistList from './Components/ArtistList';
-import getArtists from './api';
+import { createStackNavigator } from 'react-navigation';
+
+import HomeView from './Containers/Home';
+import ArtistDetail from './Containers/ArtistDetail';
+
+const RootStack = createStackNavigator({
+  Home: {
+    screen: HomeView
+  },
+  Details: {
+    screen: ArtistDetail
+  },
+});
 
 export default class FavoriteMusic extends Component {
-
-  constructor(){
-    super()
-    this.state = {
-      artists: []
-    }
-  }
-
-  componentDidMount() {
-    getArtists().then(artists => {
-      this.setState({
-        artists: artists
-      })
-    });
-  }
-
   render() {
-    const artists = this.state.artists;
-    return (
-      <ArtistList artists={artists}/>
-    );
+    return <RootStack/>
   }
 }
 
